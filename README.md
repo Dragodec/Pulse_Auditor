@@ -1,4 +1,4 @@
-📊 Pulse Auditor (V3)
+📊 Pulse Auditor
 Pulse Auditor is a conservative repository reliability tool built to help developers move beyond "Star Bias." It prioritizes maintenance resilience and operational risk over raw popularity.
 
 🛠 What It Is

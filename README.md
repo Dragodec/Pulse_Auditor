@@ -1,16 +1,35 @@
-# React + Vite
+📊 Pulse Auditor (V3)
+Pulse Auditor is a conservative repository reliability tool built to help developers move beyond "Star Bias." It prioritizes maintenance resilience and operational risk over raw popularity.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🛠 What It Is
+A frontend-heavy diagnostic utility that evaluates GitHub repositories using a custom Reliability Heuristic (V3). It acts as a "Reliability Analyst," providing an objective verdict on whether a dependency is safe for long-term production use.
 
-Currently, two official plugins are available:
+🔍 What It Does
+Active Validation Scoring: Repositories must "earn" their score through consistent, unique days of activity rather than high-volume bursts.
+Maintenance Drift Detection: Implements a "Stagnation Tax" that penalizes projects based on the time elapsed since the last meaningful heartbeat.
+Bus Factor Analysis: Quantifies "Maintainer Concentration" to identify single points of failure (SPOFs) where one developer owns >75% of recent work.
+Confidence Intervals: Explicitly flags audits as "Low Confidence" if there is insufficient data (e.g., < 5 commits) to make a reliable judgment.
+Markdown Export: Generates professional audit summaries to be pasted into Jira, Slack, or GitHub issues for team decision-making.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚫 What It Doesn't Do
+No Code Quality Analysis: It does not read your source code or check for bugs; it evaluates the maintenance process.
+No Popularity Contests: It ignores star counts and forks as "vanity metrics" that don't guarantee current maintenance.
+No Future Predictions: It evaluates historical and current signals; it cannot predict if a maintainer will quit tomorrow.
+🏗 The Reliability Heuristic (The Logic)
+The project uses an Active-Validation Model. Unlike traditional metrics that start at 100, Pulse assumes High Uncertainty and requires data to prove reliability.
 
-## React Compiler
+Scoring Weights:
+Activity Consistency (40%): Measures unique days of activity to penalize "Zingen-style" bursts.
+Responsiveness (30%): Measures average issue resolution speed.
+Baseline Resilience (30%): A starting baseline that is eroded by Stagnation Penalties and High Bus Factors.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🚀 Tech Stack & Development
+Core: React.js, Tailwind CSS, Framer Motion.
+API: GitHub REST API (Client-side fetching).
+Workflow: Developed using an AI-Orchestrated workflow, where I acted as the Architect and Reliability Analyst, identifying and patching "Ghost Vitality" edge cases through iterative prompt engineering and rigorous manual testing.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+⚡ Quick Start
+Clone the repo.
+Add your VITE_GITHUB_TOKEN to .env.
+npm install && npm run dev
+Paste any GitHub URL for an instant audit.

@@ -2,16 +2,10 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { getScoreSeverity } from './scoringFormula';
 
-/**
- * VitalityCard
- * Displays the core health metrics and the animated score.
- * Demonstrates GSAP for numerical precision and Tailwind for dynamic styling.
- */
 const VitalityCard = ({ stats }) => {
   const scoreRef = useRef(null);
   const severity = getScoreSeverity(stats.score);
 
-  // GSAP: Animate the number from 0 to the calculated score
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -22,16 +16,12 @@ const VitalityCard = ({ stats }) => {
           duration: 1.5,
           ease: 'power3.out',
           snap: { textContent: 1 },
-          stagger: {
-            each: 1.0,
-          },
         }
       );
     });
     return () => ctx.revert();
   }, [stats.score]);
 
-  // Dynamic Styles based on health
   const themes = {
     healthy: 'border-emerald-500/20 bg-emerald-500/5 text-emerald-400',
     warning: 'border-amber-500/20 bg-amber-500/5 text-amber-400',
@@ -39,33 +29,33 @@ const VitalityCard = ({ stats }) => {
   };
 
   return (
-    <div className={`rounded-2xl border p-8 transition-all ${themes[severity]}`}>
-      <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+    <div className={`rounded-3xl border p-6 md:p-10 transition-all ${themes[severity]}`}>
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
         
         {/* Left: Main Score Display */}
-        <div className="flex-1">
-          <h2 className="text-sm font-medium uppercase tracking-widest opacity-70">
+        <div className="flex-1 w-full">
+          <h2 className="text-xs font-black uppercase tracking-[0.2em] opacity-60 mb-2">
             Vitality Score
           </h2>
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-baseline gap-3">
             <span 
               ref={scoreRef} 
-              className="text-8xl font-black tracking-tighter"
+              className="text-7xl md:text-9xl font-black tracking-tighter"
             >
               0
             </span>
-            <span className="text-2xl font-bold opacity-50">/100</span>
+            <span className="text-3xl font-bold opacity-40">/100</span>
           </div>
-          <p className="mt-4 max-w-md text-lg leading-relaxed brightness-125">
+          <p className="mt-6 max-w-xl text-lg md:text-xl font-medium leading-relaxed brightness-110">
             {stats.description || "No description provided for this repository."}
           </p>
         </div>
 
-        {/* Right: Breakdown Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full md:w-auto">
+        {/* Right: Breakdown Stats - Larger text and robust grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-[450px]">
           <StatBox 
             label="Monthly Commits" 
-            value={stats.commitsCount} 
+            value={stats.commits.length} 
             sub="Last 30 days" 
           />
           <StatBox 
@@ -80,16 +70,16 @@ const VitalityCard = ({ stats }) => {
           />
           <StatBox 
             label="License" 
-            value={stats.license} 
+            value={stats.license || "N/A"} 
             sub="Legal health" 
           />
         </div>
       </div>
 
       {/* Visual Indicator Bar */}
-      <div className="mt-8 h-2 w-full bg-black/20 rounded-full overflow-hidden">
+      <div className="mt-10 h-3 w-full bg-black/30 rounded-full overflow-hidden">
         <div 
-          className="h-full bg-current transition-all duration-1000 ease-out"
+          className="h-full bg-current transition-all duration-1000 ease-out shadow-[0_0_20px_rgba(0,0,0,0.5)]"
           style={{ width: `${stats.score}%` }}
         />
       </div>
@@ -97,14 +87,11 @@ const VitalityCard = ({ stats }) => {
   );
 };
 
-/**
- * Internal Sub-component for consistent stat layout
- */
 const StatBox = ({ label, value, sub }) => (
-  <div className="p-4 rounded-xl bg-black/10 border border-white/5 flex flex-col">
-    <span className="text-xs uppercase opacity-60 font-semibold">{label}</span>
-    <span className="text-2xl font-bold my-1">{value}</span>
-    <span className="text-[10px] opacity-50 uppercase tracking-tighter">{sub}</span>
+  <div className="p-5 rounded-2xl bg-black/20 border border-white/5 flex flex-col justify-center min-h-[110px]">
+    <span className="text-[10px] uppercase opacity-50 font-black tracking-widest mb-1">{label}</span>
+    <span className="text-3xl font-black text-white">{value}</span>
+    <span className="text-[10px] opacity-40 uppercase font-bold mt-1">{sub}</span>
   </div>
 );
 

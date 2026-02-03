@@ -142,7 +142,7 @@ const Home = () => {
       <div className="mt-20 p-8 rounded-3xl bg-white/[0.04] border border-white/10 text-center backdrop-blur-md">
         <p className="text-sm text-neutral-300 font-medium max-w-2xl mx-auto leading-relaxed">
           <span className="text-emerald-400 font-black uppercase tracking-[0.2em] block mb-3 text-[10px]">
-            Methodology & Risk Notice (V3)
+            Methodology & Risk Notice
           </span>
           Pulse scores prioritize <b>consistency over bursts</b>. A lack of recent activity is penalized as "Maintenance Drift" rather than rewarded as stability.
         </p>

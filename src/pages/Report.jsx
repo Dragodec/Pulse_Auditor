@@ -8,14 +8,14 @@ import { toast } from 'react-hot-toast';
 
 /**
  * Pulse Report: Deep-Dive Analysis View
- * Combines Reliability Heuristic V3 (Risk Flags/Confidence) 
+ * Combines Reliability Heuristic(Risk Flags/Confidence) 
  * with granular maintenance metrics for complete transparency.
  */
 const Report = () => {
   const { owner, repo } = useParams();
   const navigate = useNavigate();
   
-  // Custom hook fetches data and executes Heuristic V3 logic
+  // Custom hook fetches data and executes Heuristic logic
   const { data, loading, error } = useRepoStats(owner, repo);
 
   const handleCopyReport = () => {
@@ -70,7 +70,7 @@ const Report = () => {
               {owner}<span className="text-white/20">/</span>{repo}
             </h1>
             
-            {/* V3 Meta: Confidence & Maintainer Risk */}
+            {/*Meta: Confidence & Maintainer Risk */}
             <div className="mt-4 flex flex-wrap gap-3">
               <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                 data.confidence === 'high' ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' : 'bg-amber-500/10 border-amber-500/20 text-amber-500'
@@ -143,7 +143,7 @@ const Report = () => {
       <div className="mt-20 p-8 rounded-3xl bg-white/[0.04] border border-white/10 text-center backdrop-blur-md">
         <p className="text-sm text-neutral-300 font-medium max-w-2xl mx-auto leading-relaxed">
           <span className="text-emerald-400 font-black uppercase tracking-[0.2em] block mb-3 text-[10px]">
-            Decision Support Methodology (V3)
+            Decision Support Methodology
           </span>
           Pulse scores prioritize <b>consistency over bursts</b>. Uncertainty (low data points) is explicitly penalized. This tool helps developers avoid maintenance surprises, not certify code quality.
         </p>

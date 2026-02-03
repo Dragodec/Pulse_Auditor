@@ -1,5 +1,5 @@
 /**
- * Pulse Reliability Heuristic V3
+ * Pulse Reliability Heuristic
  * Focus: Risk Mitigation, Consistency, and Data Confidence.
  */
 

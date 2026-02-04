@@ -44,6 +44,7 @@ const Home = () => {
         ]);
         const resTimes = issues.map(i => (new Date(i.closed_at) - new Date(i.created_at)) / 86400000);
         const avgRes = resTimes.length ? resTimes.reduce((a,b)=>a+b,0)/resTimes.length : 0;
+        
         const metrics = {
           commits,
           avgResolutionDays: avgRes,
@@ -53,6 +54,8 @@ const Home = () => {
           full_name: details.full_name,
           owner: details.owner,
           name: details.name,
+          // FIX: Mapped for Comparison Results
+          description: details.description,
           license: details.license?.spdx_id || "None"
         };
         const reliabilityData = calculateHealthScore(metrics);

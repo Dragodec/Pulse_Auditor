@@ -5,7 +5,7 @@ import client from './client';
  */
 export const fetchRepoDetails = async (owner, repo) => {
   const { data } = await client.get(`/repos/${owner}/${repo}`);
-  return data;
+  return data; // Returns full object including 'description' and 'license'
 };
 
 /**
@@ -22,13 +22,12 @@ export const fetchRecentCommits = async (owner, repo) => {
 };
 
 /**
- * Fetches the most recent closed issues to calculate resolution speed
+ * Fetches closed issues for resolution speed calculation
  */
 export const fetchClosedIssues = async (owner, repo) => {
   const { data } = await client.get(`/repos/${owner}/${repo}/issues`, {
     params: { state: 'closed', per_page: 30 },
   });
-  // Filter out Pull Requests if they are mixed in the issues response
   return data.filter(item => !item.pull_request);
 };
 

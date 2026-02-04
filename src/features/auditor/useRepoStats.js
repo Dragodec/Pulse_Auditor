@@ -9,9 +9,7 @@ export const useRepoStats = (owner, repo) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Prevent fetching if params are missing
       if (!owner || !repo) return;
-      
       setLoading(true);
       setError(null);
 
@@ -26,14 +24,17 @@ export const useRepoStats = (owner, repo) => {
         const avgRes = resTimes.length ? resTimes.reduce((a, b) => a + b, 0) / resTimes.length : 0;
 
         const metrics = {
-          commits, // Necessary for unique days/consistency
+          commits,
           avgResolutionDays: avgRes,
           openIssues: details.open_issues_count,
           isArchived: details.archived,
           stars: details.stargazers_count,
           full_name: details.full_name,
           owner: details.owner,
-          name: details.name
+          name: details.name,
+          // FIX: Explicitly map metadata
+          description: details.description,
+          license: details.license?.spdx_id || details.license?.name || "None"
         };
 
         const reliabilityResult = calculateHealthScore(metrics);
@@ -47,7 +48,6 @@ export const useRepoStats = (owner, repo) => {
     };
 
     fetchData();
-    // CRITICAL: Dependency array must include owner/repo
   }, [owner, repo]); 
 
   return { data, loading, error };
